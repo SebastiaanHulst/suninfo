@@ -1,0 +1,126 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+	"time"
+
+	"github.com/tidwall/buntdb"
+	"github.com/tidwall/gjson"
+)
+
+func main() {
+	db, _ := buntdb.Open(":memory:")
+	//db, _ := buntdb.Open("data.db")
+	db.Update(func(tx *buntdb.Tx) error {
+		tx.Set("0101", `{"date":"0101","sunrise":"08:47","sunset":"16:39"}`, nil)
+		tx.Set("0201", `{"date":"0201","sunrise":"08:47","sunset":"16:40"}`, nil)
+		tx.Set("0301", `{"date":"0301","sunrise":"08:47","sunset":"16:41"}`, nil)
+		tx.Set("0401", `{"date":"0401","sunrise":"08:47","sunset":"16:43"}`, nil)
+		tx.Set("0501", `{"date":"0501","sunrise":"08:46","sunset":"16:44"}`, nil)
+		tx.Set("0601", `{"date":"0601","sunrise":"08:46","sunset":"16:45"}`, nil)
+		tx.Set("0701", `{"date":"0701","sunrise":"08:45","sunset":"16:46"}`, nil)
+		tx.Set("0801", `{"date":"0801","sunrise":"08:45","sunset":"16:48"}`, nil)
+		tx.Set("0901", `{"date":"0901","sunrise":"08:44","sunset":"16:49"}`, nil)
+		tx.Set("1001", `{"date":"1001","sunrise":"08:44","sunset":"16:51"}`, nil)
+		tx.Set("1101", `{"date":"1101","sunrise":"08:43","sunset":"16:52"}`, nil)
+		tx.Set("1201", `{"date":"1201","sunrise":"08:47","sunset":"16:39"}`, nil)
+		tx.Set("1301", `{"date":"1301","sunrise":"08:47","sunset":"16:40"}`, nil)
+		tx.Set("1401", `{"date":"1401","sunrise":"08:47","sunset":"16:41"}`, nil)
+		tx.Set("1501", `{"date":"1501","sunrise":"08:47","sunset":"16:43"}`, nil)
+		tx.Set("1601", `{"date":"1601","sunrise":"08:46","sunset":"16:44"}`, nil)
+		tx.Set("1701", `{"date":"1701","sunrise":"08:46","sunset":"16:45"}`, nil)
+		tx.Set("1801", `{"date":"1801","sunrise":"08:45","sunset":"16:46"}`, nil)
+		tx.Set("1901", `{"date":"1901","sunrise":"08:45","sunset":"16:48"}`, nil)
+		tx.Set("2001", `{"date":"2001","sunrise":"08:44","sunset":"16:49"}`, nil)
+		tx.Set("2101", `{"date":"2101","sunrise":"08:44","sunset":"16:51"}`, nil)
+		tx.Set("2201", `{"date":"2201","sunrise":"08:43","sunset":"16:52"}`, nil)
+		tx.Set("2301", `{"date":"2301","sunrise":"08:47","sunset":"16:39"}`, nil)
+		tx.Set("2401", `{"date":"2401","sunrise":"08:47","sunset":"16:40"}`, nil)
+		tx.Set("2501", `{"date":"2501","sunrise":"08:47","sunset":"16:41"}`, nil)
+		tx.Set("2601", `{"date":"2601","sunrise":"08:47","sunset":"16:43"}`, nil)
+		tx.Set("2701", `{"date":"2701","sunrise":"08:46","sunset":"16:44"}`, nil)
+		tx.Set("2801", `{"date":"2801","sunrise":"08:46","sunset":"16:45"}`, nil)
+		tx.Set("2901", `{"date":"2901","sunrise":"08:45","sunset":"16:46"}`, nil)
+		tx.Set("3001", `{"date":"3001","sunrise":"08:45","sunset":"16:48"}`, nil)
+		tx.Set("3101", `{"date":"3101","sunrise":"08:44","sunset":"16:49"}`, nil)
+
+		tx.Set("0102", `{"date":"0102","sunrise":"08:47","sunset":"16:39"}`, nil)
+		tx.Set("0202", `{"date":"0202","sunrise":"08:47","sunset":"16:40"}`, nil)
+		tx.Set("0302", `{"date":"0302","sunrise":"08:47","sunset":"16:41"}`, nil)
+		tx.Set("0402", `{"date":"0402","sunrise":"08:47","sunset":"16:43"}`, nil)
+		tx.Set("0502", `{"date":"0502","sunrise":"08:46","sunset":"16:44"}`, nil)
+		tx.Set("0602", `{"date":"0602","sunrise":"08:46","sunset":"16:45"}`, nil)
+		tx.Set("0702", `{"date":"0702","sunrise":"08:45","sunset":"16:46"}`, nil)
+		tx.Set("0802", `{"date":"0802","sunrise":"08:45","sunset":"16:48"}`, nil)
+		tx.Set("0902", `{"date":"0902","sunrise":"08:44","sunset":"16:49"}`, nil)
+		tx.Set("1002", `{"date":"1002","sunrise":"08:44","sunset":"16:51"}`, nil)
+		tx.Set("1102", `{"date":"1102","sunrise":"08:43","sunset":"16:52"}`, nil)
+		tx.Set("1202", `{"date":"1202","sunrise":"08:47","sunset":"16:39"}`, nil)
+		tx.Set("1302", `{"date":"1302","sunrise":"08:47","sunset":"16:40"}`, nil)
+		tx.Set("1402", `{"date":"1402","sunrise":"08:47","sunset":"16:41"}`, nil)
+		tx.Set("1502", `{"date":"1502","sunrise":"08:47","sunset":"16:43"}`, nil)
+		tx.Set("1602", `{"date":"1602","sunrise":"08:46","sunset":"16:44"}`, nil)
+		tx.Set("1702", `{"date":"1702","sunrise":"08:46","sunset":"16:45"}`, nil)
+		tx.Set("1802", `{"date":"1802","sunrise":"08:45","sunset":"16:46"}`, nil)
+		tx.Set("1902", `{"date":"1902","sunrise":"08:45","sunset":"16:48"}`, nil)
+		tx.Set("2002", `{"date":"2002","sunrise":"08:44","sunset":"16:49"}`, nil)
+		tx.Set("2102", `{"date":"2102","sunrise":"08:44","sunset":"16:51"}`, nil)
+		tx.Set("2202", `{"date":"2202","sunrise":"08:43","sunset":"16:52"}`, nil)
+		tx.Set("2302", `{"date":"2302","sunrise":"08:47","sunset":"16:39"}`, nil)
+		tx.Set("2402", `{"date":"2402","sunrise":"08:47","sunset":"16:40"}`, nil)
+		tx.Set("2502", `{"date":"2502","sunrise":"08:47","sunset":"16:41"}`, nil)
+		tx.Set("2602", `{"date":"2602","sunrise":"08:47","sunset":"16:43"}`, nil)
+		tx.Set("2702", `{"date":"2702","sunrise":"08:46","sunset":"16:44"}`, nil)
+		tx.Set("2802", `{"date":"2802","sunrise":"08:46","sunset":"16:45"}`, nil)
+		tx.Set("2902", `{"date":"2902","sunrise":"08:45","sunset":"16:46"}`, nil)
+
+		tx.Set("0103", `{"date":"0103","sunrise":"08:47","sunset":"16:39"}`, nil)
+		tx.Set("0203", `{"date":"0203","sunrise":"08:47","sunset":"16:40"}`, nil)
+		tx.Set("0303", `{"date":"0303","sunrise":"08:47","sunset":"16:41"}`, nil)
+		tx.Set("0403", `{"date":"0403","sunrise":"08:47","sunset":"16:43"}`, nil)
+		tx.Set("0503", `{"date":"0503","sunrise":"08:46","sunset":"16:44"}`, nil)
+		tx.Set("0603", `{"date":"0603","sunrise":"08:46","sunset":"16:45"}`, nil)
+		tx.Set("0703", `{"date":"0703","sunrise":"08:45","sunset":"16:46"}`, nil)
+		tx.Set("0803", `{"date":"0803","sunrise":"08:45","sunset":"16:48"}`, nil)
+		tx.Set("0903", `{"date":"0903","sunrise":"08:44","sunset":"16:49"}`, nil)
+		tx.Set("1003", `{"date":"1003","sunrise":"08:44","sunset":"16:51"}`, nil)
+		tx.Set("1103", `{"date":"1103","sunrise":"08:43","sunset":"16:52"}`, nil)
+		tx.Set("1203", `{"date":"1203","sunrise":"08:47","sunset":"16:39"}`, nil)
+		tx.Set("1303", `{"date":"1403","sunrise":"08:47","sunset":"16:40"}`, nil)
+		tx.Set("1403", `{"date":"1403","sunrise":"08:47","sunset":"16:41"}`, nil)
+		tx.Set("1503", `{"date":"1503","sunrise":"08:47","sunset":"16:43"}`, nil)
+		tx.Set("1603", `{"date":"1603","sunrise":"08:46","sunset":"16:44"}`, nil)
+		tx.Set("1703", `{"date":"1703","sunrise":"08:46","sunset":"16:45"}`, nil)
+		tx.Set("1803", `{"date":"1803","sunrise":"08:45","sunset":"16:46"}`, nil)
+		tx.Set("1903", `{"date":"1903","sunrise":"08:45","sunset":"16:48"}`, nil)
+		tx.Set("2003", `{"date":"2003","sunrise":"08:44","sunset":"16:49"}`, nil)
+		tx.Set("2103", `{"date":"2103","sunrise":"08:44","sunset":"16:51"}`, nil)
+		tx.Set("2203", `{"date":"2203","sunrise":"08:43","sunset":"16:52"}`, nil)
+		tx.Set("2303", `{"date":"2303","sunrise":"08:47","sunset":"16:39"}`, nil)
+		tx.Set("2403", `{"date":"2403","sunrise":"08:47","sunset":"16:40"}`, nil)
+		tx.Set("2503", `{"date":"2503","sunrise":"08:47","sunset":"16:41"}`, nil)
+		tx.Set("2603", `{"date":"2603","sunrise":"08:47","sunset":"16:43"}`, nil)
+		tx.Set("2703", `{"date":"2703","sunrise":"08:46","sunset":"16:44"}`, nil)
+		tx.Set("2803", `{"date":"2803","sunrise":"08:46","sunset":"16:45"}`, nil)
+		tx.Set("2903", `{"date":"2903","sunrise":"08:45","sunset":"16:46"}`, nil)
+		tx.Set("3003", `{"date":"3003","sunrise":"08:45","sunset":"16:48"}`, nil)
+		tx.Set("3103", `{"date":"3103","sunrise":"08:44","sunset":"16:49"}`, nil)
+
+		return nil
+	})
+	err := db.View(func(tx *buntdb.Tx) error {
+		key := fmt.Sprintf("%02d%02d", time.Now().Day(), time.Now().Month())
+		val, err := tx.Get(key)
+		if err != nil {
+			return err
+		}
+		ts := gjson.Get(val, "sunrise").String()
+		us := gjson.Get(val, "sunset").String()
+		fmt.Printf("%s %s\n", strings.Replace(ts, ":", "", -1), strings.Replace(us, ":", "", -1))
+		return nil
+	})
+	if err != nil {
+		panic(err)
+	}
+}
