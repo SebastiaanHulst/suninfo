@@ -11,7 +11,6 @@ import (
 
 func main() {
 	db, _ := buntdb.Open(":memory:")
-	//db, _ := buntdb.Open("data.db")
 	db.Update(func(tx *buntdb.Tx) error {
 
 		// Januari
