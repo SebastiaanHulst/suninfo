@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/tidwall/buntdb"
@@ -412,7 +411,8 @@ func main() {
 		}
 		ts := gjson.Get(val, "sunrise").String()
 		us := gjson.Get(val, "sunset").String()
-		fmt.Printf("%s %s\n", strings.Replace(ts, ":", "", -1), strings.Replace(us, ":", "", -1))
+		//fmt.Printf("%s %s\n", strings.Replace(ts, ":", "", -1), strings.Replace(us, ":", "", -1))
+		fmt.Printf("%s %s", (ts), (us))
 		return nil
 	})
 	if err != nil {
